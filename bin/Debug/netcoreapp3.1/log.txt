@@ -1,0 +1,70 @@
+New exception From FileReader: 
+18/04/2020 23:48:39
+System.IO.FileNotFoundException: Could not find file 'F:\Projects\Console apps\Words\bin\Debug\netcoreapp3.1\test.txt'.
+File name: 'F:\Projects\Console apps\Words\bin\Debug\netcoreapp3.1\test.txt'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+
+New exception From FileReader: 
+18/04/2020 23:49:13
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'F:\Projects\Console apps\Words\bin\Debug\netcoreapp3.1\Data\Dictionary.txt'.
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+
+New exception From FileReader: 
+22/04/2020 20:19:18
+System.IO.FileNotFoundException: Could not find file 'F:\Projects\Console apps\Words\text.txt'.
+File name: 'F:\Projects\Console apps\Words\text.txt'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+
+New exception From FileReader: 
+22/04/2020 20:25:37
+System.IO.IOException: The filename, directory name, or volume label syntax is incorrect. : 'F:\Projects\Console apps\Words\bin\Debug\netcoreapp3.1\F:\Projects\Console apps\Words\test.txt'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+
+New exception From FileReader: 
+22/04/2020 20:26:00
+System.UnauthorizedAccessException: Access to the path 'F:\Projects\Console apps\Words' is denied.
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+
+New exception From FileReader: 
+22/04/2020 20:26:29
+System.IO.FileNotFoundException: Could not find file 'F:\Projects\Console apps\Words\text.txt'.
+File name: 'F:\Projects\Console apps\Words\text.txt'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+
+New exception From FileReader: 
+22/04/2020 20:42:45
+System.ArgumentException: Empty path name is not legal.
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+

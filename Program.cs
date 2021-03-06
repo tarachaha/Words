@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Words.Data;
 
 namespace Words
 {
     class Program
     {
+        private static readonly FileReader _fileReader = new FileReader();
+        private static readonly WordMatcher _wordMatcher = new WordMatcher();
+        private const string dictionaryPath = @"F:\Projects\Console apps\Words\Data\Dictionary.txt";
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to word unscrambler! How do you want to input words to unscramble? ");
@@ -46,18 +51,36 @@ namespace Words
 
         private static void ExecuteFileInputScenario(string path)
         {
-            List<string> words = new List<string>();
-            FileReader.ReadFromFile(path, words);
-            foreach (string item in words)
+            List<string> words = _fileReader.ReadFromFile(path);
+
+            List<MatchedWord> matches = _wordMatcher.Matches(words, dictionaryPath);
+            if (matches.Any())
             {
-                Console.WriteLine(item);
+                foreach (var matchedp in matches)
+                {
+                    Console.WriteLine($"Match found for word {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
+                }
             }
-            
+            else
+            {
+                Console.WriteLine("No matches have been found.");
+            }
         }
 
         private static void ExecuteManualInputScenario()
         {
-            throw new NotImplementedException();
+            string[] words = Console.ReadLine().Split(",");
+            List<MatchedWord> matches = _wordMatcher.Matches(words, dictionaryPath);
+            if (matches.Any())
+            {
+                foreach (var matchedp in matches)
+                {
+                    Console.WriteLine($"Match found for word {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
+                }
+            }else
+            {
+                Console.WriteLine("No matches have been found.");
+            }
         }
     }
 }

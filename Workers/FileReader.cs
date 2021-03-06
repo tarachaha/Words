@@ -6,17 +6,17 @@ namespace Words
 {
     public class FileReader
     {
-        public static List<string> ReadFromFile(string path, List<string> wordsRead)
+        public List<string> ReadFromFile(string path)
         {
-            // List<string> wordsRead = new List<string>();
+            List<string> wordsRead = new List<string>();
             try
             {
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    String[] text = sr.ReadToEnd().Split(" ");
+                    String[] text = sr.ReadToEnd().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string word in text)
                     {
-                        wordsRead.Add(word);
+                        wordsRead.Add(word.Trim(new char[] {',', '.'}));
                     }
                 }
             }
