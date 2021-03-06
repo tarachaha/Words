@@ -7,10 +7,14 @@ namespace Words
     public class WordMatcher
     {
         private static readonly FileReader _fileReader = new FileReader();
-        internal List<MatchedWord> Matches(string[] words, string dict)
+
+        //Create two overloads for 'Matches' method - for file and manual input
+        //
+        //Manual input
+        public List<MatchedWord> Matches(string[] words, List<string> dictionary)
         {
             List<MatchedWord> matchedWords = new List<MatchedWord>();
-            List<string> dictionary = _fileReader.ReadFromFile(dict);
+            //Iterate through each word given and each word in dictionary
             if (dictionary.Count > 1)
             {
                 foreach (string wordToCheck in words)
@@ -26,6 +30,7 @@ namespace Words
                         char[] refrenceWord = dictWord.Trim('\r').ToCharArray();
                         Array.Sort(refrenceWord);
                         var sortedReferenceWord = new string(refrenceWord);
+                        //Check if letter sorted words match and were not the same before sorting
                         if (sortedToCheck.Equals(sortedReferenceWord, StringComparison.OrdinalIgnoreCase) &&
                             !(wordToCheck.Equals(dictWord.Trim('\r'), StringComparison.OrdinalIgnoreCase)))
                         {
@@ -36,10 +41,12 @@ namespace Words
             }
             return matchedWords;
         }
-        internal List<MatchedWord> Matches(List<string> words, string dict)
+        //File input
+        public List<MatchedWord> Matches(List<string> words, List<string> dictionary)
         {
             List<MatchedWord> matchedWords = new List<MatchedWord>();
-            List<string> dictionary = _fileReader.ReadFromFile(dict);
+
+            //Iterate through each word read from file and each word in dictionary
             if (dictionary.Count > 1)
             {
                 foreach (string wordToCheck in words)
@@ -52,11 +59,12 @@ namespace Words
                     foreach (string dictWord in dictionary)
                     {
 
-                        char[] refrenceWord = dictWord.ToCharArray();
+                        char[] refrenceWord = dictWord.Trim('\r').ToCharArray();
                         Array.Sort(refrenceWord);
                         var sortedReferenceWord = new string(refrenceWord);
+                        //Check if letter sorted words match and were not the same before sorting
                         if (sortedToCheck.Equals(sortedReferenceWord, StringComparison.OrdinalIgnoreCase) &&
-                            !(wordToCheck.Equals(dictWord, StringComparison.OrdinalIgnoreCase)))
+                            !(wordToCheck.Equals(dictWord.Trim('\r'), StringComparison.OrdinalIgnoreCase)))
                         {
                             matchedWords.Add(new MatchedWord() { Word = dictWord, UnscrambledWord = wordToCheck });
                         }

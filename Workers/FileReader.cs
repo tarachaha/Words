@@ -16,7 +16,7 @@ namespace Words
                     String[] text = sr.ReadToEnd().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string word in text)
                     {
-                        wordsRead.Add(word.Trim(new char[] {',', '.'}));
+                        wordsRead.Add(word.Trim(new char[] {',', '.', '\r', '!', '?'}));
                     }
                 }
             }

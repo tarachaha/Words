@@ -12,74 +12,74 @@ namespace Words
     {
         private static readonly FileReader _fileReader = new FileReader();
         private static readonly WordMatcher _wordMatcher = new WordMatcher();
-        private const string dictionaryPath = @"F:\Projects\Console apps\Words\Data\Dictionary.txt";
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to word unscrambler! How do you want to input words to unscramble? ");
+            Console.WriteLine(Constants.greeting);
             bool optionM;
             bool optionF;
-            bool startOver = false;
+            bool startOver;
             
+
             do
             {
-                Console.Write("Press M for manual or F for reading from file: ");
+                Console.Write(Constants.chooseInputOption);
                 string inputType = Console.ReadLine();
                 optionM = inputType.Equals("m", StringComparison.OrdinalIgnoreCase);
                 optionF = inputType.Equals("f", StringComparison.OrdinalIgnoreCase);
                 if (optionM)
                 {
-                    Console.Write("Please enter comma separated words (or single word):  ");
+                    Console.Write(Constants.manualInputRequest);
                     ExecuteManualInputScenario();
                 }else if(optionF)
                 {
-                    Console.Write("Please input file path: ");
+                    Console.Write(Constants.filePathRequest);
                     var textPath = Console.ReadLine() ?? string.Empty;
                     ExecuteFileInputScenario(textPath);
                 }else{
                     Console.WriteLine();
-                    Console.WriteLine("Incorrect selection");
+                    Console.WriteLine(Constants.incorrectSelection);
                 }
                 string startOverDecision = string.Empty;
                 do
                 {
-                    Console.WriteLine("Do you want to start over? Y/N");
+                    Console.WriteLine(Constants.askIfStartOver);
                     startOverDecision = Console.ReadLine();
                     startOver = startOverDecision.Equals("Y",StringComparison.OrdinalIgnoreCase);
+                
                 } while (!startOver && !startOverDecision.Equals("N",StringComparison.OrdinalIgnoreCase));
             }while(startOver);
         }
 
         private static void ExecuteFileInputScenario(string path)
         {
+            List<string> dictionary = _fileReader.ReadFromFile(Constants.dictionaryPath);
             List<string> words = _fileReader.ReadFromFile(path);
 
-            List<MatchedWord> matches = _wordMatcher.Matches(words, dictionaryPath);
-            if (matches.Any())
-            {
-                foreach (var matchedp in matches)
-                {
-                    Console.WriteLine($"Match found for word {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No matches have been found.");
-            }
+            List<MatchedWord> matches = _wordMatcher.Matches(words, dictionary);
+            DisplayMatches(matches);
         }
 
         private static void ExecuteManualInputScenario()
         {
+            List<string> dictionary = _fileReader.ReadFromFile(Constants.dictionaryPath);
             string[] words = Console.ReadLine().Split(",");
-            List<MatchedWord> matches = _wordMatcher.Matches(words, dictionaryPath);
+            List<MatchedWord> matches = _wordMatcher.Matches(words, dictionary);
+            DisplayMatches(matches);
+        }
+
+        private static void DisplayMatches(List<MatchedWord> matches)
+        {
             if (matches.Any())
             {
                 foreach (var matchedp in matches)
                 {
-                    Console.WriteLine($"Match found for word {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
+                    Console.WriteLine($"{Constants.listMatchesFound} {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
                 }
-            }else
+            }
+            else
             {
-                Console.WriteLine("No matches have been found.");
+                Console.WriteLine(Constants.noMatches);
             }
         }
     }
