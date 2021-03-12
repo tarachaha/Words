@@ -1,0 +1,11 @@
+New exception From FileReader: 
+10/03/2021 02:13:19
+System.IO.FileNotFoundException: Could not find file 'F:\Projects\Console apps\Words\Dictionary.txt'.
+File name: 'F:\Projects\Console apps\Words\Dictionary.txt'
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+   at System.IO.StreamReader..ctor(String path)
+   at Words.FileReader.ReadFromFile(String path) in F:\Projects\Console apps\Words\Workers\FileReader.cs:line 14
+

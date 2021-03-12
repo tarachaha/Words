@@ -15,7 +15,7 @@ namespace Words
 
         static void Main(string[] args)
         {
-            Console.WriteLine(Constants.greeting);
+            Console.WriteLine(Constants.Greeting);
             bool optionM;
             bool optionF;
             bool startOver;
@@ -23,37 +23,37 @@ namespace Words
 
             do
             {
-                Console.Write(Constants.chooseInputOption);
+                Console.Write(Constants.ChooseInputOption);
                 string inputType = Console.ReadLine();
-                optionM = inputType.Equals("m", StringComparison.OrdinalIgnoreCase);
-                optionF = inputType.Equals("f", StringComparison.OrdinalIgnoreCase);
+                optionM = inputType.Equals(Constants.ManualInputOption, StringComparison.OrdinalIgnoreCase);
+                optionF = inputType.Equals(Constants.FileInputOption, StringComparison.OrdinalIgnoreCase);
                 if (optionM)
                 {
-                    Console.Write(Constants.manualInputRequest);
+                    Console.Write(Constants.ManualInputRequest);
                     ExecuteManualInputScenario();
                 }else if(optionF)
                 {
-                    Console.Write(Constants.filePathRequest);
+                    Console.Write(Constants.FilePathRequest);
                     var textPath = Console.ReadLine() ?? string.Empty;
                     ExecuteFileInputScenario(textPath);
                 }else{
                     Console.WriteLine();
-                    Console.WriteLine(Constants.incorrectSelection);
+                    Console.WriteLine(Constants.IncorrectSelection);
                 }
                 string startOverDecision = string.Empty;
                 do
                 {
-                    Console.WriteLine(Constants.askIfStartOver);
+                    Console.WriteLine(Constants.AskIfStartOver);
                     startOverDecision = Console.ReadLine();
-                    startOver = startOverDecision.Equals("Y",StringComparison.OrdinalIgnoreCase);
+                    startOver = startOverDecision.Equals(Constants.YesUserInput,StringComparison.OrdinalIgnoreCase);
                 
-                } while (!startOver && !startOverDecision.Equals("N",StringComparison.OrdinalIgnoreCase));
+                } while (!startOver && !startOverDecision.Equals(Constants.NoUserInput,StringComparison.OrdinalIgnoreCase));
             }while(startOver);
         }
 
         private static void ExecuteFileInputScenario(string path)
         {
-            List<string> dictionary = _fileReader.ReadFromFile(Constants.dictionaryPath);
+            List<string> dictionary = _fileReader.ReadFromFile(Constants.DictionaryPath);
             List<string> words = _fileReader.ReadFromFile(path);
 
             List<MatchedWord> matches = _wordMatcher.Matches(words, dictionary);
@@ -62,7 +62,7 @@ namespace Words
 
         private static void ExecuteManualInputScenario()
         {
-            List<string> dictionary = _fileReader.ReadFromFile(Constants.dictionaryPath);
+            List<string> dictionary = _fileReader.ReadFromFile(Constants.DictionaryPath);
             string[] words = Console.ReadLine().Split(",");
             List<MatchedWord> matches = _wordMatcher.Matches(words, dictionary);
             DisplayMatches(matches);
@@ -74,12 +74,12 @@ namespace Words
             {
                 foreach (var matchedp in matches)
                 {
-                    Console.WriteLine($"{Constants.listMatchesFound} {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
+                    Console.WriteLine($"{Constants.ListMatchesFound} {matchedp.UnscrambledWord.Trim('\r')} : {matchedp.Word.Trim('\r')}");
                 }
             }
             else
             {
-                Console.WriteLine(Constants.noMatches);
+                Console.WriteLine(Constants.NoMatches);
             }
         }
     }
