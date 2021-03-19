@@ -16,30 +16,27 @@ namespace Words
         static void Main(string[] args)
         {
             Console.WriteLine(Constants.Greeting);
-            bool optionM;
-            bool optionF;
-            bool startOver;
-            
+            bool startOver;           
 
             do
             {
                 Console.Write(Constants.ChooseInputOption);
                 string inputType = Console.ReadLine();
-                optionM = inputType.Equals(Constants.ManualInputOption, StringComparison.OrdinalIgnoreCase);
-                optionF = inputType.Equals(Constants.FileInputOption, StringComparison.OrdinalIgnoreCase);
-                if (optionM)
+                switch (inputType.ToLower())
                 {
-                    Console.Write(Constants.ManualInputRequest);
-                    ExecuteManualInputScenario();
-                }else if(optionF)
-                {
-                    Console.Write(Constants.FilePathRequest);
-                    var textPath = Console.ReadLine() ?? string.Empty;
-                    ExecuteFileInputScenario(textPath);
-                }else{
-                    Console.WriteLine();
-                    Console.WriteLine(Constants.IncorrectSelection);
+                    case Constants.ManualInputOption:
+                        Console.Write(Constants.ManualInputRequest);
+                        ExecuteManualInputScenario();
+                        break;
+                    case Constants.FileInputOption:
+                        Console.Write(Constants.FilePathRequest);
+                        var textPath = Console.ReadLine() ?? string.Empty;
+                        ExecuteFileInputScenario(textPath);
+                    default:
+                        Console.WriteLine();
+                        Console.WriteLine(Constants.IncorrectSelection);
                 }
+                
                 string startOverDecision = string.Empty;
                 do
                 {
@@ -50,7 +47,39 @@ namespace Words
                 } while (!startOver && !startOverDecision.Equals(Constants.NoUserInput,StringComparison.OrdinalIgnoreCase));
             }while(startOver);
         }
-
+        
+        private static bool GetStartOverDecision()
+        {
+            string decision = AskAndGetDecisionUntilCorrect();
+            switch (decision)
+            {
+                case Constants.YesUserInput:
+                    return true;
+                    break;
+                case Constants.NoUserInput:
+                    return false;
+                    break;
+                default:
+                    return false;
+                    break
+            }
+        }
+        private static string AskAndGetDecisionUntilCorrect()
+        {
+            bool startOver = true;
+            string startOverDecision = string.Empty;
+            do
+            {
+                Console.WriteLine(Constants.AskIfStartOver);
+                startOverDecision = Console.ReadLine();
+                if (startOverDecision.Equals(Constants.YesUserInput,StringComparison.OrdinalIgnoreCase) ||
+                   startOverDecision.Equals(Constants.NoUserInput,StringComparison.OrdinalIgnoreCase))
+                {
+                    startOver = false;
+                }
+            }while(startOver);
+            return startOverDecision;
+        }
         private static void ExecuteFileInputScenario(string path)
         {
             List<string> dictionary = _fileReader.ReadFromFile(Constants.DictionaryPath);
