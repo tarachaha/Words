@@ -32,42 +32,30 @@ namespace Words
                         Console.Write(Constants.FilePathRequest);
                         var textPath = Console.ReadLine() ?? string.Empty;
                         ExecuteFileInputScenario(textPath);
+                        break;
                     default:
                         Console.WriteLine();
                         Console.WriteLine(Constants.IncorrectSelection);
+                        break;
                 }
-                
-                string startOverDecision = string.Empty;
-                do
-                {
-                    Console.WriteLine(Constants.AskIfStartOver);
-                    startOverDecision = Console.ReadLine();
-                    startOver = startOverDecision.Equals(Constants.YesUserInput,StringComparison.OrdinalIgnoreCase);
-                
-                } while (!startOver && !startOverDecision.Equals(Constants.NoUserInput,StringComparison.OrdinalIgnoreCase));
+                startOver = GetStartOverDecision();
             }while(startOver);
         }
         
         private static bool GetStartOverDecision()
         {
             string decision = AskAndGetDecisionUntilCorrect();
-            switch (decision)
+            return decision switch
             {
-                case Constants.YesUserInput:
-                    return true;
-                    break;
-                case Constants.NoUserInput:
-                    return false;
-                    break;
-                default:
-                    return false;
-                    break
-            }
+                Constants.YesUserInput => true,
+                Constants.NoUserInput => false,
+                _ => false,
+            };
         }
         private static string AskAndGetDecisionUntilCorrect()
         {
             bool startOver = true;
-            string startOverDecision = string.Empty;
+            string startOverDecision;
             do
             {
                 Console.WriteLine(Constants.AskIfStartOver);
